@@ -250,10 +250,12 @@
       justify-content: space-between;
       margin-bottom: 14px;
       color: #6b7280;
+      gap: 16px;
     }
 
     .row strong {
       color: #111827;
+      text-align: right;
     }
 
     hr {
@@ -280,8 +282,15 @@
       border-radius: 12px;
       padding: 14px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .order-meta {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 14px;
       margin-bottom: 24px;
     }
 
@@ -433,11 +442,11 @@
         <div class="product-details">
           <div class="product-label">Product Details</div>
 
-          <h2>Amazon Prime+ Active 6 Month Plan</h2>
+          <h2>Amazon Prime+ Active 2 Year Plan</h2>
 
           <p class="muted">
             Premium streaming subscription package with ad-free entertainment,
-            Ultra HD 4K access, and priority support.
+            Ultra HD 4K access, and priority support for 2 years.
           </p>
         </div>
       </div>
@@ -466,7 +475,7 @@
       </div>
 
       <div class="card">
-        <div class="card-header">Your 6 Month Plan Benefits</div>
+        <div class="card-header">Your 2 Year Plan Benefits</div>
 
         <div class="card-body">
           <div class="benefit">
@@ -502,18 +511,40 @@
           <h2>Order Summary</h2>
           <p class="muted" style="margin: 8px 0 22px;">Amazon Prime+ Active</p>
 
-          <div class="plan">
-            <div>
-              <div class="value">6 Month Plan</div>
-              <div class="muted">Renews automatically</div>
+          <div class="order-meta">
+            <div class="row">
+              <span>Order Placed</span>
+              <strong id="orderDate"></strong>
             </div>
 
-            <div class="price">$699.00</div>
+            <div class="row">
+              <span>Time</span>
+              <strong id="orderTime"></strong>
+            </div>
+
+            <div class="row">
+              <span>Invoice ID</span>
+              <strong id="invoiceId"></strong>
+            </div>
+
+            <div class="row" style="margin-bottom: 0;">
+              <span>Transaction ID</span>
+              <strong id="transactionId"></strong>
+            </div>
+          </div>
+
+          <div class="plan">
+            <div>
+              <div class="value">2 Year Plan</div>
+              <div class="muted">Valid for 24 months</div>
+            </div>
+
+            <div class="price">$299.00</div>
           </div>
 
           <div class="row">
             <span>Subtotal</span>
-            <strong>$699.00</strong>
+            <strong>$299.00</strong>
           </div>
 
           <div class="row">
@@ -525,7 +556,7 @@
 
           <div class="total">
             <span>Total Due Today</span>
-            <span class="amount">$699.00</span>
+            <span class="amount">$299.00</span>
           </div>
 
           <div class="payment">
@@ -533,8 +564,6 @@
               <div class="value">💳 Visa ending in 4242</div>
               <div class="muted">Exp 12/26</div>
             </div>
-
-            <div style="color:#0057b8; font-size:13px;">Edit</div>
           </div>
         </div>
 
@@ -570,12 +599,38 @@
     </div>
 
     <div class="disclaimer">
-      Disclaimer: This is a demonstration interface. No real transactions are processed.
-      Not affiliated with Amazon.com, Inc.
+      DISCLAIMER: THIS TRANSACTION IS COMPLETED BY AMAZON.COM, INC 2026.
     </div>
   </footer>
 
   <script>
+    const now = new Date();
+
+    const date = now.toLocaleDateString("en-US", {
+      month: "2-digit",
+      day: "2-digit",
+      year: "numeric"
+    });
+
+    const time = now.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true
+    });
+
+    const dateStamp =
+      now.getFullYear().toString() +
+      String(now.getMonth() + 1).padStart(2, "0") +
+      String(now.getDate()).padStart(2, "0");
+
+    const randomNumber = Math.floor(100000 + Math.random() * 900000);
+
+    document.getElementById("orderDate").textContent = date;
+    document.getElementById("orderTime").textContent = time;
+    document.getElementById("invoiceId").textContent = "INV-" + dateStamp + "-" + randomNumber;
+    document.getElementById("transactionId").textContent = "TXN-" + dateStamp + "-" + Math.floor(10000000 + Math.random() * 90000000);
+
     function confirmOrder() {
       const button = document.getElementById("confirmBtn");
       const message = document.getElementById("confirmationMsg");
