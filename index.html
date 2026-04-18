@@ -71,7 +71,6 @@
 
     .badge {
       display: inline-flex;
-      align-items: center;
       background: #dbeafe;
       color: #0057b8;
       padding: 6px 14px;
@@ -101,6 +100,66 @@
       overflow: hidden;
       margin-bottom: 24px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    }
+
+    .product-card {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+    }
+
+    .product-image {
+      min-height: 190px;
+      padding: 24px;
+      color: white;
+      background: linear-gradient(135deg, #041e42, #0f4c81, #00a8e1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product-play {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+    }
+
+    .product-prime {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .product-active {
+      color: #ffb300;
+      font-size: 20px;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .product-details {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .product-label {
+      color: #0057b8;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .product-details h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
     }
 
     .card-header {
@@ -135,12 +194,17 @@
     .muted {
       color: #6b7280;
       font-size: 14px;
+      line-height: 1.6;
     }
 
     .benefit {
       display: flex;
       gap: 16px;
       margin-bottom: 22px;
+    }
+
+    .benefit:last-child {
+      margin-bottom: 0;
     }
 
     .benefit-icon {
@@ -237,7 +301,6 @@
       font-size: 18px;
       font-weight: 800;
       cursor: pointer;
-      transition: 0.2s;
     }
 
     button:hover {
@@ -312,6 +375,10 @@
         grid-template-columns: 1fr;
       }
 
+      .product-card {
+        grid-template-columns: 1fr;
+      }
+
       .info-grid {
         grid-template-columns: 1fr;
       }
@@ -353,6 +420,28 @@
         Amazon exclusive prime subscription purchase. Please review your details before final activation.
       </p>
 
+      <div class="card product-card">
+        <div class="product-image">
+          <div class="product-play">▶</div>
+
+          <div>
+            <div class="product-prime">prime</div>
+            <div class="product-active">Active</div>
+          </div>
+        </div>
+
+        <div class="product-details">
+          <div class="product-label">Product Details</div>
+
+          <h2>Amazon Prime+ Active 6 Month Plan</h2>
+
+          <p class="muted">
+            Premium streaming subscription package with ad-free entertainment,
+            Ultra HD 4K access, and priority support.
+          </p>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-header">Customer Information</div>
 
@@ -367,8 +456,8 @@
             <div>
               <div class="label">Billing Address</div>
               <div class="value">
-                1234 Streaming Blvd, Suite 400<br>
-                Los Angeles, CA 90028<br>
+                1234 Streaming Blvd, Suite 400<br />
+                Los Angeles, CA 90028<br />
                 United States
               </div>
             </div>
@@ -418,6 +507,7 @@
               <div class="value">6 Month Plan</div>
               <div class="muted">Renews automatically</div>
             </div>
+
             <div class="price">$699.00</div>
           </div>
 
@@ -431,7 +521,7 @@
             <strong>$0.00</strong>
           </div>
 
-          <hr>
+          <hr />
 
           <div class="total">
             <span>Total Due Today</span>
@@ -443,13 +533,14 @@
               <div class="value">💳 Visa ending in 4242</div>
               <div class="muted">Exp 12/26</div>
             </div>
+
             <div style="color:#0057b8; font-size:13px;">Edit</div>
           </div>
         </div>
 
         <div class="button-area">
-          <button id="activateBtn" onclick="completeActivation()">
-            Complete Activation →
+          <button id="confirmBtn" onclick="confirmOrder()">
+            Order Confirmed
           </button>
 
           <div id="confirmationMsg" class="confirmation">
@@ -457,7 +548,7 @@
           </div>
 
           <div class="terms">
-            By completing this activation, you agree to our Terms of Service.
+            By confirming this order, you agree to our Terms of Service.
             This is an independent demo/order page and not an official Amazon checkout.
           </div>
         </div>
@@ -485,18 +576,18 @@
   </footer>
 
   <script>
-    function completeActivation() {
-      const button = document.getElementById("activateBtn");
+    function confirmOrder() {
+      const button = document.getElementById("confirmBtn");
       const message = document.getElementById("confirmationMsg");
 
       button.disabled = true;
       button.textContent = "Processing...";
 
-      setTimeout(() => {
-        button.textContent = "Order Confirmed ✓";
+      setTimeout(function () {
+        button.textContent = "Order Confirmed";
         message.style.display = "block";
       }, 2000);
     }
   </script>
 </body>
-  </html>
+</html>
